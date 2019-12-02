@@ -4,8 +4,8 @@ defaults: &defaults
     - image: circleci/node:latest 
 
 version: 2
-jobs:
   <<: *defaults
+jobs:
    build:
       steps:
       - checkout
