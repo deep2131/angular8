@@ -44,10 +44,4 @@ jobs:
       - run:
           name: Unit Tests
           command: npm run test:unit
-  workflows:
-    <<: *defaults
-    build_and_test:
-    jobs:
-    - build
-    - test
 
