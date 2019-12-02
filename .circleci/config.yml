@@ -5,8 +5,8 @@ defaults: &defaults
 
 version: 2
 jobs:
-   build:
-     steps:
+    build:
+      steps:
       - checkout
       - run:
           name: update npm
@@ -34,10 +34,10 @@ jobs:
           root: dist
           paths: 
             - ./
-   test:
-   requires:
+    test:
+    requires:
       - build
-     steps:
+    steps:
       - checkout
       - run:
           name: Install Dependencies
@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Unit Tests
           command: npm run test:unit
-  deploy:
+    deploy:
     machine:
       enabled: true
     working_directory: ~/angular8
@@ -72,5 +72,3 @@ workflows:
           bucket: angular-s3-bucket
           
    
- 
-       
