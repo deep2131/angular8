@@ -5,7 +5,7 @@ defaults: &defaults
 
 version: 2
 jobs:
-    build:
+   build:
       steps:
       - checkout
       - run:
@@ -49,7 +49,7 @@ jobs:
     machine:
       enabled: true
     working_directory: ~/angular8
-    steps:
+     steps:
        - run:
           name: Deploy
           command: 'aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1'       
