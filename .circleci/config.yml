@@ -60,11 +60,11 @@ workflows:
        - build:
            filters:
              branches:
-               ignore: /master/
+               only: /master/
        - test:
            filters:
              branches:
-               ignore: /master/
+               only: /master/
        - deploy:
            requires:
              - build
