@@ -45,7 +45,7 @@ jobs:
           name: Unit Tests
           command: npm run test:unit
   workflows:
-    version: 2
+    <<: *defaults
     build_and_test:
     jobs:
     - build
