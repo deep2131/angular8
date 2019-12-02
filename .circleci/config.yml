@@ -54,7 +54,7 @@ jobs:
           name: Deploy
           command: 'aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1'       
           
-  workflows:
+workflows:
   main:
     jobs:
       - build
