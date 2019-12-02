@@ -29,13 +29,21 @@ jobs:
           command: npm audit fix --force
       - run:
           name: Build Application
-          command: 
-            - npm run build
-            - 'aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1'
+          command: npm run build
+           
       - persist_to_workspace: 
           root: dist
           paths: 
             - ./
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/angular8
+    steps:
+       - run:
+          name: Deploy
+          command: 'aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1'          
+   
  #test:
    #<<: *defaults
    #steps:
