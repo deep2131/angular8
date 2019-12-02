@@ -40,7 +40,7 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: npm install
+          command: npm instal
       - run:
           name: Unit Tests
           command: npm run test:unit
