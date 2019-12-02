@@ -35,6 +35,16 @@ jobs:
           root: dist
           paths: 
             - ./
+   test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Unit Tests
+          command: npm run test:unit
   deploy:
     machine:
       enabled: true
@@ -42,16 +52,25 @@ jobs:
     steps:
        - run:
           name: Deploy
-          command: 'aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1'          
+          command: 'aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1'       
+          
+  workflows:
+  main:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+          workspace: .
+          artifacts: dist
+          bucket: angular-s3-bucket
+          
    
- #test:
-   #<<: *defaults
-   #steps:
-    # - checkout
-    # - run:
-      #   name: Install Dependencies
-     #    command: npm install
-    # - run:
-      #   name: Unit Tests
-       #  command: npm run test:unit
+ 
        
