@@ -48,6 +48,9 @@ jobs:
    deploy:
      <<: *defaults
      steps:
+       - run:
+           name: Install Dependencies
+           command: aws install awscli
        - attach_workspace : 
            at: ~/angular8/dist
        - run:
