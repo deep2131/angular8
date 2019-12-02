@@ -34,7 +34,7 @@ jobs:
           root: dist
           paths: 
             - ./
-   test:
+    test:
     requires:
             - build
     steps:
