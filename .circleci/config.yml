@@ -4,9 +4,9 @@ defaults: &defaults
     - image: circleci/node:latest 
 
 version: 2
-     <<: *defaults
 jobs:
    build:
+     <<: *defaults
       steps:
       - checkout
       - run:
@@ -35,41 +35,4 @@ jobs:
           root: dist
           paths: 
             - ./
-   # test:
-   # requires:
-   #   - build
-   # steps:
-    #  - checkout
-    #  - run:
-     #     name: Install Dependencies
-     #     command: npm install
-    #  - run:
-    #      name: Unit Tests
-    #      command: npm run test:unit
-   # deploy:
-   # machine:
-    #  enabled: true
-   # working_directory: ~/angular8
-   #  steps:
-   #    - run:
-     #     name: Deploy
-     #     command: 'aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1'       
-          
-#workflows:
-#  main:
-#    jobs:
- #     - build
- #     - test:
- #         requires:
- #           - build
-  #    - deploy:
-   #       requires:
-    #        - test
-    #      filters:
-    #        branches:
-     #         only: master
-      #    workspace: .
-      #    artifacts: dist
-      #    bucket: angular-s3-bucket
-          
-   
+ 
