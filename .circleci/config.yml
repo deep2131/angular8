@@ -34,9 +34,9 @@ jobs:
           root: dist
           paths: 
             - ./
-    test:
-    requires:
-            - build
+  test:
+  requires:
+      - build
     steps:
       - checkout
       - run:
