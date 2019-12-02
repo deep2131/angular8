@@ -36,7 +36,8 @@ jobs:
           paths: 
             - ./
    test:
-    <<: *defaults
+    requires:
+            - build
     steps:
       - checkout
       - run:
