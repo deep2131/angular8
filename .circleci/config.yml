@@ -5,8 +5,8 @@ defaults: &defaults
 
 version: 2
 jobs:
-  build:
-    steps:
+   build:
+     steps:
       - checkout
       - run:
           name: update npm
@@ -34,10 +34,10 @@ jobs:
           root: dist
           paths: 
             - ./
-  test:
-  requires:
+   test:
+   requires:
       - build
-    steps:
+     steps:
       - checkout
       - run:
           name: Install Dependencies
