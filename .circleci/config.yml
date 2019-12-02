@@ -31,7 +31,7 @@ jobs:
           name: Build Application
           command: 
             - npm run build
-            - aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1
+            - 'aws s3 sync ${./dist}/ s3://${angular-s3-bucket} --region ap-south-1'
       - persist_to_workspace: 
           root: dist
           paths: 
