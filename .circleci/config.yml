@@ -45,9 +45,9 @@ jobs:
            name: upload artifact
            command: |
                cd myartifacts
-               git add myartifact.tar
-               git commit -m "artifact"
-               git push origin master
+               #git add myartifact.tar
+               #git commit -m "artifact"
+               #git push origin master
                mv myartifacts
                git add .
                git commit
