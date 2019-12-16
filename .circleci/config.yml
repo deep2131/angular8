@@ -40,6 +40,8 @@ jobs:
                 paths:
                     - ./
    upload_artifacts:
+     docker:
+       - image: circleci/node:latest
      working_directory: ~/Artifacts
      steps: 
        - checkout 
