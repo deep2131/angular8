@@ -34,20 +34,24 @@ jobs:
              - ./
        - run: 
            name: compress artifacts
-           command: tar -cvf myartifact.tar dist  
-       - run:
-           name: set identity 
            command: |
-               git config --global user.email "suryawal.deepali.com"
-               git config --global user.name "deep2131"
-               git config --global push.followTags true
-       - run:
-           name: upload artifact
-           command: |
-               cd myartifacts
-               git add myartifact.tar
-               git commit -m "artifact"
-               git push --force origin master
+               mkdir build
+               cd build
+               zip myartifact.zip dist
+               #tar -cvf myartifact.tar dist  
+     
+      # - run:
+       #    name: set identity 
+        #   command: |
+         #      git config --global user.email "suryawal.deepali.com"
+          #     git config --global user.name "deep2131"
+           #    git config --global push.followTags true
+      # - run:
+       #    name: upload artifact
+        #   command: |
+               #git add build
+               #git commit -m "artifact"
+               #git push --force origin master
                #git clone git remote add git@github.com:deep2131/angular8.git
                #cd myartifacts
               # mv myartifacts 
