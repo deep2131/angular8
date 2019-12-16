@@ -31,10 +31,13 @@ jobs:
        - persist_to_workspace: 
            root: dist
            paths: 
-             - ./dist.zip
+             - ./
+       - run: 
+           name: compress artifacts
+           command: tar -cvf myartifact.tar dist  
        - run:
            name: upload artifact
-           command: git push --force ./dist.zip myartifacts --build-name= demo --build-number=$CIRCLE_BUILD_NUM
+           command: git push --force myartifact.tar myartifacts --build-name= demo --build-number=$CIRCLE_BUILD_NUM
            
            
     # ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
