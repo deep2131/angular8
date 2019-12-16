@@ -37,8 +37,8 @@ jobs:
            command: |
                mkdir build
                cd build
-               zip myartifact.zip dist
-               #tar -cvf myartifact.tar dist  
+               
+               tar -cvf myartifact.tar dist  
      
       # - run:
        #    name: set identity 
