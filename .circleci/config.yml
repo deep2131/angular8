@@ -27,45 +27,27 @@ jobs:
        - run:
            name: Build Application
            command: npm run build
-       - run:
-           name: Zip Application
-           command: zip artifact-{{ .Environment.CIRCLE_SHA1 }}.zip dist
            
        - persist_to_workspace: 
-           root: dist
+           root: .
            paths: 
-             - ./
-       - save_cache:
-                key: v1-dist-{{ .Environment.CIRCLE_SHA1 }}
-                paths:
-                    - dist
-   deploy:
-     <<: *defaults
-     steps:
-       - checkout
+             - ./dist.zip
        - run:
-           name: check git status -2
-           command: git status && git branch
-       - restore_cache:
-                key: v1-dist-
-       - run: 
-           name: check
-           command: ls -ltr
-       - run: 
-           name: content
-           command: ls -ltr dist
-       
-       - run: 
-           name: copy, commit and push
-           command:  ls -ltr &&  git status && git add . && git commit -m "first" && git push origin master
+           name: upload artifact
+           command: git push --force ./dist.zip myartifacts --build-name= demo --build-number=$CIRCLE_BUILD_NUM
+           
+           
+    # ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
+
+
        
 workflows:
    version: 2
    build-deploy:
      jobs:
        - build
-       - deploy:
-           requires:
-             - build
+      #- deploy:
+        #  requires:
+         #   - build
            
   
