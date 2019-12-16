@@ -3,7 +3,7 @@ jobs:
    build:
    working_directory: ~/angular8
    docker:
-    - image: circleci/node:latest 
+       - image: circleci/node:latest 
 
      steps:
        - checkout
