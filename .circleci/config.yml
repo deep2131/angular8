@@ -4,20 +4,15 @@ defaults: &defaults
     - image: circleci/node:latest 
 
 version: 2
-orbs:
-  aws-cli: circleci/aws-cli@dev:alpha
 jobs:
    build:
      <<: *defaults
      steps:
        - checkout
-       - run:
-           name: update npm
-           command: 'sudo npm install -g npm@latest'
        - restore_cache:
            key: sudo dependency-cache-{{ checksum "package-lock.json" }}
        - run:
-           name: Install npm wee
+           name: Install npm
            command: npm install
        - save_cache:
            key: sudo dependency-cache-{{ checksum "package-lock.json" }}
@@ -32,39 +27,45 @@ jobs:
        - run:
            name: Build Application
            command: npm run build
+       - run:
+           name: Zip Application
+           command: zip artifact-{{ .Environment.CIRCLE_SHA1 }}.zip dist
            
        - persist_to_workspace: 
            root: dist
            paths: 
              - ./
-   test:
+       - save_cache:
+                key: v1-dist-{{ .Environment.CIRCLE_SHA1 }}
+                paths:
+                    - dist
+   deploy:
      <<: *defaults
      steps:
        - checkout
        - run:
-           name: Install Dependencies
-           command: npm install
-       - run:
-           name: Unit Tests
-           command: npm run test:unit
-   deploy:
-     <<: *defaults
-     steps:
-       - attach_workspace : 
-           at: ~/angular8/dist
-       - run:
-           name: Deploy to S3 
-           command: aws s3 sync ${./dist} s3://${angular-s3-bucket} --region ${ap-south-1}
+           name: check git status -2
+           command: git status && git branch
+       - restore_cache:
+                key: v1-dist-
+       - run: 
+           name: check
+           command: ls -ltr
+       - run: 
+           name: content
+           command: ls -ltr dist
+       
+       - run: 
+           name: copy, commit and push
+           command:  ls -ltr &&  git status && git add . && git commit -m "first" && git push origin master
+       
 workflows:
    version: 2
-   build-test-deploy:
+   build-deploy:
      jobs:
        - build
-       - test:
-          requires:
-             - build
        - deploy:
            requires:
-             - test
+             - build
            
   
