@@ -5,7 +5,7 @@ jobs:
      docker:
        - image: circleci/node:latest 
 
-      steps:
+     steps:
        - checkout
        - restore_cache:
            key: sudo dependency-cache-{{ checksum "package-lock.json" }}
