@@ -25,16 +25,19 @@ jobs:
        - run:
            name: Build Application
            command: npm run build
-           
+       - run:
+           name: Zip Application
+           command: zip artifact.zip dist appspec.yml
+       
        - persist_to_workspace: 
            root: dist
            paths: 
-             - ./
-       - run: 
-           name: compress artifacts
-           command: tar -cvf myartifact.tar dist  
+             - ./   
+     #  - run: 
+       #    name: compress artifacts
+       #    command: tar -cvf myartifact.tar dist  
        - save_cache:
-                key: v1-myartifact.tar-{{ .Environment.CIRCLE_BUILD_NUM }}
+                key: zip-artifact.zip-{{ .Environment.CIRCLE_SHA1 }}
                 paths:
                     - ./
    upload_artifacts:
@@ -44,13 +47,13 @@ jobs:
      steps: 
        - checkout 
        - restore_cache:
-                key: v1-myartifact.tar-
+                key: zip-artifact.zip-
        - run:
            name: set identity 
            command: |
                git config --global user.email "suryawal.deepali@gmail.com"
                git config --global user.name "deep2131"
-               git config --global push.followTags true
+               #git config --global push.followTags true
        - run:
            name: upload artifact
            command: |
@@ -58,8 +61,8 @@ jobs:
                cd mynewrepo
                ls -ltr
                git status
-               cp ../myartifact.tar .
-               git add myartifact.tar
+               cp ../artifact.zip .
+               git add artifact.zip
                git commit -m "artifact"
                git push --force origin master
                
