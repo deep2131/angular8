@@ -61,10 +61,10 @@ jobs:
                git commit
                git clone git@github.com:deep2131/Artifacts.git
                cd artifacts
-               git remote add build
+               git remote add myartifact.tar
                git pull git@github.com:deep2131/angular8.git
                git remote rm git@github.com:deep2131/angular8.git
-              # git push --force origin master
+               git push --force origin master
            
            
        
