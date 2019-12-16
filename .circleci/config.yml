@@ -35,11 +35,16 @@ jobs:
        - run: 
            name: compress artifacts
            command: tar -cvf myartifact.tar dist  
-      # - store_artifacts:
-       #    path: myartifact.tar
-       #    destination: Build
-           
-     
+       - save_cache:
+                key: v1-myartifact.tar-{{ .Environment.CIRCLE_BUILD_NUM }}
+                paths:
+                    - ./
+   upload_artifacts:
+     working_directory: ~/Artifacts
+     steps: 
+       - checkout 
+       - restore_cache:
+                key: v1-myartifact.tar-
        - run:
            name: set identity 
            command: |
@@ -51,21 +56,8 @@ jobs:
            command: |
                git add myartifact.tar
                git commit -m "artifact"
-               git push origin master
-               git pull git@github.com:deep2131/angular8.git
-               cd myartifact.tar
-               git remote rm origin
-               mkdir dir1
-               mv * dir1
-               git add .
-               git commit
-               git clone git@github.com:deep2131/Artifacts.git
-               cd artifacts
-               git remote add myartifact.tar
-               git pull git@github.com:deep2131/angular8.git
-               git remote rm git@github.com:deep2131/angular8.git
                git push --force origin master
-           
+               
            
        
 workflows:
@@ -73,8 +65,8 @@ workflows:
    build-deploy:
      jobs:
        - build
-      #- deploy:
-        #  requires:
-         #   - build
+       - upload_artifacts:
+          requires:
+            - build
            
   
