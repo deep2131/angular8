@@ -52,7 +52,7 @@ jobs:
                git add myartifact.tar
                git commit -m "artifact"
                git push origin master
-               git clone git remote add git@github.com:deep2131/angular8.git
+               git pull git@github.com:deep2131/angular8.git
                cd myartifact.tar
                git remote rm origin
                mkdir dir1
