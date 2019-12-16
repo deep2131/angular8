@@ -1,12 +1,10 @@
-defaults: &defaults
-  working_directory: ~/angular8
-  docker:
-    - image: circleci/node:latest 
-
 version: 2
 jobs:
    build:
-     <<: *defaults
+   working_directory: ~/angular8
+   docker:
+    - image: circleci/node:latest 
+
      steps:
        - checkout
        - restore_cache:
@@ -40,10 +38,10 @@ jobs:
                 paths:
                     - ./
    upload_artifacts:
-     docker:
+   docker:
        - image: circleci/node:latest
-     working_directory: ~/Artifacts
-     steps: 
+   working_directory: ~/Artifacts
+    steps: 
        - checkout 
        - restore_cache:
                 key: v1-myartifact.tar-
