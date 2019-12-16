@@ -36,6 +36,11 @@ jobs:
            name: compress artifacts
            command: tar -cvf myartifact.tar dist  
        - run:
+           name: set identity 
+           command: |
+               git config --global user.email "suryawal.deepali.com"
+               git config --global user.name "deep2131"
+       - run:
            name: upload artifact
            command: |
                git add myartifact.tar
