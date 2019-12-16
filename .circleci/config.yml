@@ -57,9 +57,9 @@ jobs:
                git clone git@github.com:deep2131/Artifacts.git
                ls -ltr
                git status
-               git add v1-myartifact.tar-
+               git add myartifact.tar
                git commit -m "artifact"
-               git push --force origin master
+               git push --force git@github.com:deep2131/Artifacts.git
                
            
        
