@@ -59,7 +59,7 @@ jobs:
                git status
                git add myartifact.tar
                git commit -m "artifact"
-               git push --force git@github.com:deep2131/Artifacts.git
+               git push --force origin master
                
            
        
