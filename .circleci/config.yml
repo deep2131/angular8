@@ -58,7 +58,7 @@ jobs:
                cd mynewrepo
                ls -ltr
                git status
-               git add myartifact.tar
+               git add ../myartifact.tar
                git commit -m "artifact"
                git push --force origin master
                
