@@ -56,7 +56,9 @@ jobs:
        - run:
            name: upload artifact
            command: |
-               git add myartifact.tar
+               git ls -ltr
+               git status
+               git add v1-myartifact.tar-
                git commit -m "artifact"
                git push --force origin master
                
