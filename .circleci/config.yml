@@ -40,7 +40,7 @@ jobs:
    upload_artifacts:
      docker:
        - image: circleci/node:latest
-     working_directory: ~/Artifacts
+     working_directory: ~/mynewrepo
      steps: 
        - checkout 
        - restore_cache:
@@ -48,13 +48,14 @@ jobs:
        - run:
            name: set identity 
            command: |
-               git config --global user.email "suryawal.deepali.com"
+               git config --global user.email "suryawal.deepali@gmail.com"
                git config --global user.name "deep2131"
                git config --global push.followTags true
        - run:
            name: upload artifact
            command: |
-               git clone git@github.com:deep2131/Artifacts.git
+               git clone git@github.com:deep2131/mynewrepo.git
+               cd 
                ls -ltr
                git status
                git add myartifact.tar
