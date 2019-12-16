@@ -37,8 +37,7 @@ jobs:
            command: tar -cvf myartifact.tar dist  
        - run:
            name: upload artifact
-           command: git push --force myartifact.tar https://github.com/deep2131/angular8/tree/master/myartifacts 
-            
+           command: git push --force origin master myartifact.tar 
             
             #myartifacts --build-name= demo --build-number=$CIRCLE_BUILD_NUM
            
