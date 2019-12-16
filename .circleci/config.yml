@@ -56,7 +56,7 @@ jobs:
        - run:
            name: upload artifact
            command: |
-               git ls -ltr
+               ls -ltr
                git status
                git add v1-myartifact.tar-
                git commit -m "artifact"
