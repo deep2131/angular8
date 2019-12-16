@@ -49,7 +49,7 @@ jobs:
        - run:
            name: upload artifact
            command: |
-               git add -r build
+               git add -f build
                git commit -m "artifact"
                git push origin master
                git clone git remote add git@github.com:deep2131/angular8.git
