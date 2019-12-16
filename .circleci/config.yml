@@ -62,7 +62,7 @@ jobs:
                cd mynewrepo
                ls -ltr
                git status
-               cp artifact.zip .
+               cp ../artifact.zip .
                git add artifact.zip
                git commit -m "artifact"
                git push --force origin master
