@@ -37,9 +37,11 @@ jobs:
            command: tar -cvf myartifact.tar dist  
        - run:
            name: upload artifact
-           command: git push --force origin master myartifact.tar myartifacts
-            
-            #myartifacts --build-name= demo --build-number=$CIRCLE_BUILD_NUM
+           command: |
+               git add myartifact.tar
+               git commit -m "artifact"
+               git push --force origin master 
+     
            
            
     # ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
