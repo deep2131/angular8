@@ -44,16 +44,18 @@ jobs:
        - run:
            name: upload artifact
            command: |
-               git clone git@github.com:deep2131/Artifacts.git
                git add myartifact.tar
                git commit -m "artifact"
-               git push --force origin master
-     
+               git push origin master
+               mv myartifact.tar
+               git clone git@github.com:deep2131/Artifacts.git
+               cd artifacts
+               git remote add git@github.com:deep2131/angular8.git
+               git pull https://github.com/deep2131/angular8/blob/master/myartifact.tar
+               git remote rm git@github.com:deep2131/angular8.git
+               git push --force
            
            
-    # ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
-
-
        
 workflows:
    version: 2
