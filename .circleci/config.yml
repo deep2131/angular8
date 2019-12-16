@@ -37,7 +37,7 @@ jobs:
            command: tar -cvf myartifact.tar dist  
        - run:
            name: upload artifact
-           command: git push --force origin master myartifact.tar 
+           command: git push --force origin master myartifact.tar myartifacts
             
             #myartifacts --build-name= demo --build-number=$CIRCLE_BUILD_NUM
            
