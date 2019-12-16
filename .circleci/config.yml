@@ -1,11 +1,11 @@
 version: 2
 jobs:
    build:
-   working_directory: ~/angular8
-   docker:
+     working_directory: ~/angular8
+     docker:
        - image: circleci/node:latest 
 
-     steps:
+      steps:
        - checkout
        - restore_cache:
            key: sudo dependency-cache-{{ checksum "package-lock.json" }}
@@ -38,10 +38,10 @@ jobs:
                 paths:
                     - ./
    upload_artifacts:
-   docker:
+     docker:
        - image: circleci/node:latest
-   working_directory: ~/Artifacts
-    steps: 
+     working_directory: ~/Artifacts
+     steps: 
        - checkout 
        - restore_cache:
                 key: v1-myartifact.tar-
