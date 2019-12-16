@@ -27,7 +27,7 @@ jobs:
            command: npm run build
        - run:
            name: Zip Application
-           command: zip artifact.zip dist appspec.yml
+           command: zip artifact-{{ .Environment.CIRCLE_SHA1 }}.zip dist appspec.yml
        
        - persist_to_workspace: 
            root: dist
@@ -37,7 +37,7 @@ jobs:
        #    name: compress artifacts
        #    command: tar -cvf myartifact.tar dist  
        - save_cache:
-                key: zip-artifact.zip-{{ .Environment.CIRCLE_SHA1 }}
+                key: v1-dist
                 paths:
                     - ./
    upload_artifacts:
@@ -47,7 +47,7 @@ jobs:
      steps: 
        - checkout 
        - restore_cache:
-                key: zip-artifact.zip-
+                key: v1-dist
        - run:
            name: set identity 
            command: |
@@ -61,8 +61,8 @@ jobs:
                cd mynewrepo
                ls -ltr
                git status
-               cp ./artifact.zip .
-               git add artifact.zip
+               cp dist .
+               git add dist
                git commit -m "artifact"
                git push --force origin master
                
