@@ -45,12 +45,10 @@ jobs:
            name: upload artifact
            command: |
                cd myartifacts
-               #git add myartifact.tar
-               #git commit -m "artifact"
-               #git push origin master
-               mv myartifacts
-               git add .
-               git commit
+               git add myartifact.tar
+               git commit -m "artifact"
+               git push origin master
+               mv myartifacts git@github.com:deep2131/Artifacts.git
                git clone git@github.com:deep2131/Artifacts.git
                cd artifacts
                git remote add git@github.com:deep2131/angular8.git
