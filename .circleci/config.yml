@@ -44,17 +44,17 @@ jobs:
        - run:
            name: upload artifact
            command: |
-               cd myartifacts
+               git checkout build-issues
                git add myartifact.tar
                git commit -m "artifact"
-               git push origin master
-               mv myartifacts git@github.com:deep2131/Artifacts.git
-               git clone git@github.com:deep2131/Artifacts.git
-               cd artifacts
-               git remote add git@github.com:deep2131/angular8.git
-               git pull https://github.com/deep2131/angular8/blob/master/myartifacts
-               git remote rm git@github.com:deep2131/angular8.git
-               git push --force 
+               git push --force origin build-issues
+               #mv myartifacts git@github.com:deep2131/Artifacts.git
+              # git clone git@github.com:deep2131/Artifacts.git
+               #cd artifacts
+              # git remote add git@github.com:deep2131/angular8.git
+              # git pull https://github.com/deep2131/angular8/blob/master/myartifacts
+              # git remote rm git@github.com:deep2131/angular8.git
+               #git push --force 
            
            
        
