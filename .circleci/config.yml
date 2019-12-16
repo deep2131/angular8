@@ -40,6 +40,7 @@ jobs:
            command: |
                git config --global user.email "suryawal.deepali.com"
                git config --global user.name "deep2131"
+               git config --global push.followTags true
        - run:
            name: upload artifact
            command: |
