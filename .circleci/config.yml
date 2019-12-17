@@ -31,7 +31,9 @@ jobs:
            root: dist
            paths: 
              - ./   
-       
+       - run:
+           name: Compress Artifacts
+           command: tar -cvf buildartifact.tar dist
 
        - run:
            name: set identity 
@@ -47,9 +49,8 @@ jobs:
                cd mynewrepo
                ls -ltr
                git status
-               cp -r ../dist .
-               cp ../appspec.yml . 
-               git add dist appspec.yml
+               cp -r ../buildartifact.tar . 
+               git add buildartifact.tar
                git commit -m "artifact"
                git push --force origin master
                
