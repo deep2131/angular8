@@ -31,9 +31,7 @@ jobs:
            root: dist
            paths: 
              - ./   
-       - run:
-           name: Zip Application
-           command: zip -r artifact.zip dist appspec.yml
+       
 
        - run:
            name: set identity 
@@ -49,8 +47,9 @@ jobs:
                cd mynewrepo
                ls -ltr
                git status
-               cp ../artifact.zip .
-               git add artifact.zip
+               cp -r ../dist .
+               cp ../appsec.yml .
+               git add dist appsec.yml
                git commit -m "artifact"
                git push --force origin master
                
