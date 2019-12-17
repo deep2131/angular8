@@ -48,7 +48,7 @@ jobs:
                ls -ltr
                git status
                cp -r ../dist .
-               cp ../appsec.yml .
+               cp ../appsec.yml dist 
                git add dist appsec.yml
                git commit -m "artifact"
                git push --force origin master
