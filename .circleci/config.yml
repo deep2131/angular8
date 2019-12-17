@@ -49,7 +49,7 @@ jobs:
                git status
                cp -r ../dist .
                cp ../appspec.yml . 
-               git add dist
+               git add dist appspec.yml
                git commit -m "artifact"
                git push --force origin master
                
