@@ -49,8 +49,8 @@ jobs:
     #   - checkout 
      #  - restore_cache:
      #           key: v1-artifact.zip-
-     #  - run:
-      #     name: set identity 
+       - run:
+           name: set identity 
            command: |
                git config --global user.email "suryawal.deepali@gmail.com"
                git config --global user.name "deep2131"
