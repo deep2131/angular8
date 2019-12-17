@@ -37,20 +37,20 @@ jobs:
      #  - run: 
        #    name: compress artifacts
        #    command: tar -cvf myartifact.tar dist  
-       - save_cache:
-                key: v1-artifact.zip-{{ .Environment.CIRCLE_SHA1 }}
-                paths:
-                    - ./
-   upload_artifacts:
-     docker:
-       - image: circleci/node:latest
-     working_directory: ~/mynewrepo
-     steps: 
-       - checkout 
-       - restore_cache:
-                key: v1-artifact.zip-
-       - run:
-           name: set identity 
+       #- save_cache:
+       #         key: v1-artifact.zip-{{ .Environment.CIRCLE_SHA1 }}
+        #        paths:
+         #           - ./
+   #upload_artifacts:
+   #  docker:
+    #   - image: circleci/node:latest
+    # working_directory: ~/mynewrepo
+    # steps: 
+    #   - checkout 
+     #  - restore_cache:
+     #           key: v1-artifact.zip-
+     #  - run:
+      #     name: set identity 
            command: |
                git config --global user.email "suryawal.deepali@gmail.com"
                git config --global user.name "deep2131"
@@ -75,8 +75,8 @@ workflows:
    build-deploy:
      jobs:
        - build
-       - upload_artifacts:
-          requires:
-            - build
+      # - upload_artifacts:
+       #   requires:
+        #    - build
            
   
