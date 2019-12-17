@@ -33,7 +33,7 @@ jobs:
              - ./   
        - run:
            name: Zip Application
-           command: zip artifact.zip dist appspec.yml
+           command: zip artifact-{{ .Environment.CIRCLE_SHA1 }}.zip dist appspec.yml
      #  - run: 
        #    name: compress artifacts
        #    command: tar -cvf myartifact.tar dist  
