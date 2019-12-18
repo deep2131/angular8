@@ -35,12 +35,12 @@ jobs:
            name: Compress Artifacts
            command: tar -cvf buildartifact.tar dist
 
-       - run:
-           name: set identity 
-           command: |
-               git config --global user.email "suryawal.deepali@gmail.com"
-               git config --global user.name "deep2131"
-               #git config --global push.followTags true
+      # - run:
+       #    name: set identity 
+       #    command: |
+        #       git config --global user.email "suryawal.deepali@gmail.com"
+         #      git config --global user.name "deep2131"
+         #      #git config --global push.followTags true
        - run:
            name: upload artifact
            command: |
