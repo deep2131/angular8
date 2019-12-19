@@ -34,16 +34,15 @@ jobs:
        - run:
            name: Compress Artifacts
            command: tar -cvf buildartifact.tar dist
-       - run:
-           name: install
-           command: yum install rsync
 
        - run:
            name: set identity 
            command: |
                git config --global user.email "suryawal.deepali@gmail.com"
                git config --global user.name "deep2131"
-       
+        - run:
+           name: install
+           command: sudo apt-get install rsync
        - run:
            name: upload artifact
            command: |
@@ -53,12 +52,12 @@ jobs:
                cd Build
                ls 
                git status
-               rsync -avz ../buildartifact.tar .
+               rsync -avz ...buildartifact.tar .
                #cp -R ../buildartifact.tar . 
                git status
-              # git add buildartifact.tar
-              # git commit -m "artifact"
-              # git push --force origin master
+               git add buildartifact.tar
+               git commit -m "artifact"
+               git push --force origin master
                
            
        
