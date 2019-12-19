@@ -50,11 +50,11 @@ jobs:
                cd Build
                ls 
                git status
-               cp -r ../buildartifact.tar . 
+               cp --parents ../buildartifact.tar . 
                git status
-             #  git add buildartifact.tar
-            #   git commit -m "artifact"
-             #  git push --force origin master
+               git add buildartifact.tar
+               git commit -m "artifact"
+               git push --force origin master
                
            
        
