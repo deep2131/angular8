@@ -40,7 +40,7 @@ jobs:
            command: |
                git config --global user.email "suryawal.deepali@gmail.com"
                git config --global user.name "deep2131"
-        - run:
+       - run:
            name: install
            command: sudo apt-get install rsync
        - run:
