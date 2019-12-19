@@ -52,7 +52,7 @@ jobs:
                cd Build
                ls 
                git status
-               rsync -avz ...buildartifact.tar .
+               rsync -avz ../buildartifact.tar .
                #cp -R ../buildartifact.tar . 
                git status
                git add buildartifact.tar
