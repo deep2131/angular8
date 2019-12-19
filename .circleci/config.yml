@@ -50,7 +50,8 @@ jobs:
                cd Build
                ls 
                git status
-               cp -R ../buildartifact.tar . 
+               rsync -avz ../buildartifact.tar .
+               #cp -R ../buildartifact.tar . 
                git status
                git add buildartifact.tar
                git commit -m "artifact"
