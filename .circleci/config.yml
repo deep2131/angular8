@@ -1,6 +1,9 @@
 version: 2
 jobs:
    build:
+     branches:
+      only:
+        - develop
      working_directory: ~/angular8
      docker:
        - image: circleci/node:latest 
@@ -62,7 +65,7 @@ jobs:
                git push --force origin master
                
            
-       
+
 
            
   
