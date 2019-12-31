@@ -1,71 +1,40 @@
-version: 2
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@6.1.0
 jobs:
    build:
      branches:
       only:
-        - master
-     working_directory: ~/angular8
+        - develop
      docker:
-       - image: circleci/node:latest 
+       - image: circleci/node:12.2.0
+     working_directory: ~/angular8
 
-     steps:
-       - checkout
-       - run:
-           name: Show current branch
-           command: echo ${CIRCLE_BRANCH}
-       - restore_cache:
-           key: sudo dependency-cache-{{ checksum "package-lock.json" }}
-       - run:
-           name: Install npm
-           command: npm install
-       - save_cache:
-           key: sudo dependency-cache-{{ checksum "package-lock.json" }}
-           paths:
-             - node_modules
-       - run:
-           name: Install Dependencies
-           command: npm install @angular/cli@8.3.20
-       - run:
-           name: Building
-           command: |
-                if [ "${CIRCLE_BRANCH}" == "build-issues" ]; then
-                  npm run build-qa
-                elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-                  npm run build-prod
-                else
-                  npm run build-dev
-                fi
-       
-       - persist_to_workspace: 
-           root: dist
-           paths: 
-             - ./   
-       - run:
-           name: Compress Artifacts
-           command: tar -cvf artifact.tar dist
+      steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
 
-       - run:
-           name: set identity 
-           command: |
-               git config --global user.email "suryawal.deepali@gmail.com"
-               git config --global user.name "deep2131"
-       - run:
-           name: upload artifact
-           command: |
-               ls -ltr
-               git clone git@github.com:deep2131/mynewrepo.git
-               cd mynewrepo
-               cd Build
-               ls 
-               git status
-               cp -r ../../artifact.tar .
-               git status
-               git add artifact.tar
-               git commit -m "artifact"
-               git push --force origin master
-               
-           
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 
-
-           
-  
+workflows:
+  version: 2.1
+  build-and-deploy:
+    jobs:
+      - build            
+      - aws-ecr/build-and-push-image:
+          requires:
+            - build
+          account-url: AWS_ACCOUNT_ID
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          repo: myrepo
+          dockerfile: "Dockerfile"
+          region: AWS_REGION
