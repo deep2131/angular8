@@ -5,7 +5,7 @@ jobs:
    build:
      branches:
       only:
-        - develop
+        - testing
      docker:
        - image: circleci/node:12.2.0
      working_directory: ~/angular8
