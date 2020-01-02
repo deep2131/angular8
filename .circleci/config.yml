@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  sonarqube: onehq/sonarqube@0.3.0
 jobs:
    build:
      branches:
@@ -45,37 +47,37 @@ jobs:
            name: Compress Artifacts
            command: tar -cvf artifact.tar dist
 
-       - run:
-           name: set identity 
-           command: |
-               git config --global user.email "suryawal.deepali@gmail.com"
-               git config --global user.name "deep2131"
-       - run:
-           name: upload artifact
-           command: |
-               if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                 git clone git@github.com:deep2131/mynewrepo.git
-                 cd mynewrepo
-                 cd Build
-                 git status
-                 cp -r ../../artifact.tar .
-                 git status
-                 git add artifact.tar
-                 git commit -m "artifact"
-                 git branch -mv origin master
-                 git push --force origin master
-               else 
-                 git clone git@github.com:deep2131/mynewrepo.git
-                 cd mynewrepo
-                 cd Build
-                 git status
-                 cp -r ../../artifact.tar .
-                 git status
-                 git add artifact.tar
-                 git commit -m "artifact"
-                 git branch -mv origin testing
-                 git push --force origin testing 
-               fi
+    #   - run:
+     #      name: set identity 
+      #     command: |
+       #        git config --global user.email "suryawal.deepali@gmail.com"
+        #       git config --global user.name "deep2131"
+       #- run:
+        #   name: upload artifact
+         #  command: |
+          #     if [ "${CIRCLE_BRANCH}" == "master" ]; then
+           #      git clone git@github.com:deep2131/mynewrepo.git
+            #     cd mynewrepo
+             #    cd Build
+              #   git status
+               #  cp -r ../../artifact.tar .
+                # git status
+                 #git add artifact.tar
+                 #git commit -m "artifact"
+                 #git branch -mv origin master
+                 #git push --force origin master
+               #else 
+                # git clone git@github.com:deep2131/mynewrepo.git
+                 #cd mynewrepo
+                 #cd Build
+                 #git status
+                 #cp -r ../../artifact.tar .
+                 #git status
+                 #git add artifact.tar
+                 #git commit -m "artifact"
+                 #git branch -mv origin testing
+                 #git push --force origin testing 
+               #fi
                  
                
                
