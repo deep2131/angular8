@@ -1,6 +1,4 @@
 version: 2
-orbs:
-  sonar-scanner: nodis-com-br/sonar-scanner@0.1.0
 jobs:
    build:
      branches:
@@ -59,8 +57,8 @@ jobs:
                  git clone git@github.com:deep2131/mynewrepo.git
                  cd mynewrepo
                  cd Build
+               if [ "${CIRCLE_BRANCH}" == "master" ]; then
                  cp -r ../../artifact.tar .
-                 if [ "${CIRCLE_BRANCH}" == "master" ]; then
                  git checkout master
                  git add artifact.tar
                  git commit -m "artifact"
