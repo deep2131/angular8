@@ -53,20 +53,26 @@ jobs:
        - run:
            name: upload artifact
            command: |
-               git clone git@github.com:deep2131/mynewrepo.git
-               cd mynewrepo
-               cd Build
-               ls 
-               git status
-               cp -r ../../artifact.tar .
-               git status
-               git add artifact.tar
-               git commit -m "artifact"
                if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                 git checkout master
+                 git clone git@github.com:deep2131/mynewrepo.git
+                 cd mynewrepo
+                 cd Build
+                 git status
+                 cp -r ../../artifact.tar .
+                 git status
+                 git add artifact.tar
+                 git commit -m "artifact"
+           
                  git push --force origin master
                else 
-                 git checkout testing 
+                 git clone git@github.com:deep2131/mynewrepo.git
+                 cd mynewrepo
+                 cd Build
+                 git status
+                 cp -r ../../artifact.tar .
+                 git status
+                 git add artifact.tar
+                 git commit -m "artifact"
                  git push --force origin testing 
                fi
                  
