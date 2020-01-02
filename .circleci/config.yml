@@ -67,8 +67,10 @@ jobs:
               
                if [ "${CIRCLE_BRANCH}" == "master" ]; then
                  git push --force origin master
-               else 
+               elif [ "${CIRCLE_BRANCH}" == "testing" ]; then
                  git push --force origin testing 
+               fi
+                 
                
                
            
