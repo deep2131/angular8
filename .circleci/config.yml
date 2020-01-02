@@ -64,20 +64,15 @@ jobs:
                git status
                git add artifact.tar
                git commit -m "artifact"
-               git push --force origin master
-               
-               else
-               git clone git@github.com:deep2131/mynewrepo.git
-               cd mynewrepo
-               cd Build
-               ls 
-               git status
-               cp -r ../../artifact.tar .
-               git status
-               git add artifact.tar
-               git commit -m "artifact"
-               git push --force origin testing
+               #git push --force origin master
+               if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                 git push --force origin master
+               else [ "${CIRCLE_BRANCH}" == "testing" ]; then
+                 git push --force origin testing 
+              # else
+               #  npm run build-dev
                fi
+               
            
                
                
