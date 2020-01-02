@@ -62,8 +62,8 @@ jobs:
                  git status
                  git add artifact.tar
                  git commit -m "artifact"
-           
-                 git push --force master
+                 git branch -mv origin master
+                 git push --force origin master
                else 
                  git clone git@github.com:deep2131/mynewrepo.git
                  cd mynewrepo
@@ -73,6 +73,7 @@ jobs:
                  git status
                  git add artifact.tar
                  git commit -m "artifact"
+                 git branch -mv origin testing
                  git push --force testing 
                fi
                  
