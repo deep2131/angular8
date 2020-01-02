@@ -62,10 +62,11 @@ jobs:
                git status
                git add artifact.tar
                git commit -m "artifact"
-              
                if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                 git checkout master
                  git push --force origin master
                elif [ "${CIRCLE_BRANCH}" == "testing" ]; then
+                 git checkout testing 
                  git push --force origin testing 
                fi
                  
