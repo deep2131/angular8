@@ -1,40 +1,83 @@
-version: 2.1
+version: 2
 orbs:
-  aws-ecr: circleci/aws-ecr@6.1.0
+  sonar-scanner: nodis-com-br/sonar-scanner@0.1.0
 jobs:
    build:
      branches:
       only:
-        - testing
-     docker:
-       - image: circleci/node:12.2.0
+        - master
+        - testing 
      working_directory: ~/angular8
+     docker:
+       - image: circleci/node:latest 
 
-      steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+     steps:
+       - checkout
+       - run:
+           name: Show current branch
+           command: echo ${CIRCLE_BRANCH}
+       - restore_cache:
+           key: sudo dependency-cache-{{ checksum "package-lock.json" }}
+       - run:
+           name: Install npm
+           command: npm install
+       - save_cache:
+           key: sudo dependency-cache-{{ checksum "package-lock.json" }}
+           paths:
+             - node_modules
+       - run:
+           name: Install Dependencies
+           command: npm install @angular/cli@8.3.20
+       - run:
+           name: Building
+           command: |
+                if [ "${CIRCLE_BRANCH}" == "build-issues" ]; then
+                  npm run build-qa
+                elif [ "${CIRCLE_BRANCH}" == "master" ]; then
+                  npm run build-prod
+                else
+                  npm run build-dev
+                fi
+       
+       - persist_to_workspace: 
+           root: dist
+           paths: 
+             - ./   
+       - run:
+           name: Compress Artifacts
+           command: tar -cvf artifact.tar dist
 
-      - run: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+       - run:
+           name: set identity 
+           command: |
+               git config --global user.email "suryawal.deepali@gmail.com"
+               git config --global user.name "deep2131"
+       - run:
+           name: upload artifact
+           command: |
+               
+                 git clone git@github.com:deep2131/mynewrepo.git
+                 cd mynewrepo
+                 cd Build
+                 cp -r ../../artifact.tar .
+                 if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                 git checkout master
+                 git add artifact.tar
+                 git commit -m "artifact"
+                 git branch -mv origin master
+                 git push --force origin master
+               else 
+                 git checkout testing
+                 git push --force origin testing 
+               fi
+                 
+               
+               
+           
+               
+               
+           
 
-workflows:
-  version: 2.1
-  build-and-deploy:
-    jobs:
-      - build            
-      - aws-ecr/build-and-push-image:
-          requires:
-            - build
-          account-url: AWS_ACCOUNT_ID
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          create-repo: true
-          repo: myrepo
-          dockerfile: "Dockerfile"
-          region: AWS_REGION
+
+           
+  
