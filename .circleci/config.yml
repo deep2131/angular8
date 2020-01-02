@@ -74,7 +74,7 @@ jobs:
                  git add artifact.tar
                  git commit -m "artifact"
                  git branch -mv origin testing
-                 git push --force testing 
+                 git push --force origin testing 
                fi
                  
                
