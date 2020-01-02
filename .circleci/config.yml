@@ -56,23 +56,22 @@ jobs:
            name: upload artifact
            command: |
                
-             if [ "${CIRCLE_BRANCH}" == "master" ]; then  
-                 git clone git@github.com:deep2131/mynewrepo.git
+                if [ "${CIRCLE_BRANCH}" == "master" ]; then  
+                  git clone git@github.com:deep2131/mynewrepo.git
                 
            
-                 cd mynewrepo
-                 cd Build
-                 cp -r ../../artifact.tar .
-                 git checkout master
-                 git add artifact.tar
-                 git commit -m "artifact"
-                 git branch -mv origin master
-                 git push --force origin master
-             else 
+                  cd mynewrepo
+                  cd Build
+                  cp -r ../../artifact.tar .
+                  git checkout master
+                  git add artifact.tar
+                  git commit -m "artifact"
+                  git branch -mv origin master
+                  git push --force origin master
+                else 
                   git checkout testing
                   git push --force origin testing 
-             fi
-                 
+                fi
                
                
            
