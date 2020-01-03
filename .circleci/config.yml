@@ -58,19 +58,25 @@ jobs:
                
                 if [ "${CIRCLE_BRANCH}" == "master" ]; then  
                   git clone git@github.com:deep2131/mynewrepo.git
-                
-           
                   cd mynewrepo
+                  git checkout master
                   cd Build
                   cp -r ../../artifact.tar .
-                  git checkout master
                   git add artifact.tar
                   git commit -m "artifact"
-                  git branch -mv origin master
                   git push --force origin master
-                else 
+                  
+                elif [ "${CIRCLE_BRANCH}" == "testing" ]; then
+                  git clone git@github.com:deep2131/mynewrepo.git
+                  cd mynewrepo
                   git checkout testing
+                  cd Build
+                  cp -r ../../artifact.tar .
+                  git add artifact.tar
+                  git commit -m "artifact"
                   git push --force origin testing 
+                
+                  
                 fi
                
                
