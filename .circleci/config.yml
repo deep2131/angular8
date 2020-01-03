@@ -72,9 +72,7 @@ jobs:
                   cp -r ../../artifact.tar .
                   git add artifact.tar
                   git commit -m "artifact"
-                  git push --force origin testing 
-                
-                  
+                  git push --force origin testing  
                 fi
                
                
