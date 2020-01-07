@@ -1,6 +1,6 @@
 version: 2
 orbs:
-  sonarqube: onehq/sonarqube@0.3.0
+  sonarqube-analyzer: corballis/sonarqube-analyzer@0.1.1
 jobs:
    build:
      branches:
@@ -38,7 +38,14 @@ jobs:
                 else
                   npm run build-dev
                 fi
-       
+       - sonarqube-analyzer: |
+                sonar.login=admin
+                sonar.password=admin
+                sonar.projectKey=project:key
+                sonar.projectName=Project Name goes here
+                sonar.projectVersion=1.0
+                sonar.sources=$WORKSPACE
+         
        - persist_to_workspace: 
            root: dist
            paths: 
