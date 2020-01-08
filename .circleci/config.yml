@@ -35,11 +35,11 @@ jobs:
        - run:
            name: Run Sonarqube scanner
            command: |
-                   cd sonar-scanner \
-                  -Dsonar.projectKey=angular8 \
-                  -Dsonar.sources=. \
-                  -Dsonar.host.url=http://localhost:9000 \
-                  -Dsonar.login=32194091c18e2c98cd620edb215040f1f02fd585
+              cd sonar-scanner \
+                 -Dsonar.projectKey=angular8 \
+                 -Dsonar.sources=. \
+                 -Dsonar.host.url=http://localhost:9000 \
+                 -Dsonar.login=32194091c18e2c98cd620edb215040f1f02fd585
        - run:
            name: Building
            command: |
