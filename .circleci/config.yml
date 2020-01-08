@@ -1,6 +1,6 @@
-version: 2
+version: 2.1
 orbs:
-  sonarqube-analyzer: corballis/sonarqube-analyzer@0.1.1
+  sonarqube: onehq/sonarqube@0.3.0
 jobs:
    build:
      branches:
@@ -38,14 +38,19 @@ jobs:
                 else
                   npm run build-dev
                 fi
-       - sonarqube-analyzer: |
-                sonar.login=admin
-                sonar.password=admin
-                sonar.projectKey=project:key
-                sonar.projectName=Project Name goes here
-                sonar.projectVersion=1.0
-                sonar.sources=$WORKSPACE
-         
+       - run:
+           name: Install Sonarqube scanner
+           command: |
+
+             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
+             unzip sonar-scanner-cli-3.2.0.1227-linux.zip
+             cd sonar-scanner-cli-3.2.0.1227-linux/conf/
+             vi sonar-scanner.properties
+             sonar.host.url: 10.238.234.117
+             sonar.projectKey: angular8
+             sonar.sources: ~/angular8
+             sonar.login: 32194091c18e2c98cd620edb215040f1f02fd585
+              
        - persist_to_workspace: 
            root: dist
            paths: 
@@ -54,35 +59,35 @@ jobs:
            name: Compress Artifacts
            command: tar -cvf artifact.tar dist
 
-       - run:
-           name: set identity 
-           command: |
-               git config --global user.email "suryawal.deepali@gmail.com"
-               git config --global user.name "deep2131"
-       - run:
-           name: upload artifact
-           command: |
-               
-                if [ "${CIRCLE_BRANCH}" == "master" ]; then  
-                  git clone git@github.com:deep2131/mynewrepo.git
-                  cd mynewrepo
-                  git checkout master
-                  cd Build
-                  cp -r ../../artifact.tar .
-                  git add artifact.tar
-                  git commit -m "artifact"
-                  git push --force origin master
+   #    - run:
+    #       name: set identity 
+     #      command: |
+      #         git config --global user.email "suryawal.deepali@gmail.com"
+       #        git config --global user.name "deep2131"
+       #- run:
+        #   name: upload artifact
+         #  command: |
+          #     
+           #     if [ "${CIRCLE_BRANCH}" == "master" ]; then  
+            #      git clone git@github.com:deep2131/mynewrepo.git
+             #     cd mynewrepo
+              #    git checkout master
+               #   cd Build
+                #  cp -r ../../artifact.tar .
+                 # git add artifact.tar
+                  #git commit -m "artifact"
+                  #git push --force origin master
                   
-                elif [ "${CIRCLE_BRANCH}" == "testing" ]; then
-                  git clone git@github.com:deep2131/mynewrepo.git
-                  cd mynewrepo
-                  git checkout testing
-                  cd Build
-                  cp -r ../../artifact.tar .
-                  git add artifact.tar
-                  git commit -m "artifact"
-                  git push --force origin testing  
-                fi
+                #elif [ "${CIRCLE_BRANCH}" == "testing" ]; then
+                 # git clone git@github.com:deep2131/mynewrepo.git
+                  #cd mynewrepo
+                  #git checkout testing
+                  #cd Build
+                  #cp -r ../../artifact.tar .
+                  #git add artifact.tar
+                  #git commit -m "artifact"
+                  #git push --force origin testing  
+                #fi
                
                
            
