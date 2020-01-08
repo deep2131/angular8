@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  sonarqube: onehq/sonarqube@0.3.0
 jobs:
    build:
      working_directory: ~/angular8
@@ -32,27 +34,20 @@ jobs:
                 else
                   npm run build-dev
                 fi
-       - run:
-           name: Install Sonarqube scanner
-           command: |
-
-             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
-             unzip sonar-scanner-cli-3.2.0.1227-linux.zip
-       - run:
-           name: Run Sonarqube scanner
-           command: |
-               cd sonar-scanner-cli-3.2.0.1227-linux
-               cd conf
-               vi sonar-scanner.properties
-               sonar.host.url: 10.238.234.117
-               sonar.projectKey: angular8
-               sonar.sources: ~/angular8
-               sonar.login: 32194091c18e2c98cd620edb215040f1f02fd585
-              
        - persist_to_workspace: 
            root: dist
            paths: 
-             - ./   
+             - ./
+       - run:
+           name: Run Sonarqube scanner
+           command: |
+               sonar-scanner \
+                  -Dsonar.projectKey=angular8 \
+                  -Dsonar.sources=. \
+                  -Dsonar.host.url=http://localhost:9000 \
+                  -Dsonar.login=32194091c18e2c98cd620edb215040f1f02fd585
+              
+         
        - run:
            name: Compress Artifacts
            command: tar -cvf artifact.tar dist
