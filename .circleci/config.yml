@@ -1,12 +1,6 @@
 version: 2.1
-orbs:
-  sonarqube: onehq/sonarqube@0.3.0
 jobs:
    build:
-     branches:
-      only:
-        - master
-        - testing 
      working_directory: ~/angular8
      docker:
        - image: circleci/node:latest 
@@ -44,12 +38,15 @@ jobs:
 
              wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
              unzip sonar-scanner-cli-3.2.0.1227-linux.zip
-             cd sonar-scanner-cli-3.2.0.1227-linux/conf/
-             vi sonar-scanner.properties
-             sonar.host.url: 10.238.234.117
-             sonar.projectKey: angular8
-             sonar.sources: ~/angular8
-             sonar.login: 32194091c18e2c98cd620edb215040f1f02fd585
+       - run:
+           name: Run Sonarqube scanner
+           command: |
+               cd sonar-scanner-cli-3.2.0.1227-linux/conf/
+               vi sonar-scanner.properties
+               sonar.host.url: 10.238.234.117
+               sonar.projectKey: angular8
+               sonar.sources: ~/angular8
+               sonar.login: 32194091c18e2c98cd620edb215040f1f02fd585
               
        - persist_to_workspace: 
            root: dist
