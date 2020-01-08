@@ -35,7 +35,7 @@ jobs:
        - run:
            name: Run Sonarqube scanner
            command: |
-              cd sonar-scanner \
+             # cd sonar-scanner \
                  -Dsonar.projectKey=angular8 \
                  -Dsonar.sources=. \
                  -Dsonar.host.url=http://localhost:9000 \
