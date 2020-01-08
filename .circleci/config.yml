@@ -41,7 +41,8 @@ jobs:
        - run:
            name: Run Sonarqube scanner
            command: |
-               cd sonar-scanner-cli-3.2.0.1227-linux/conf/
+               cd sonar-scanner-cli-3.2.0.1227-linux
+               cd conf
                vi sonar-scanner.properties
                sonar.host.url: 10.238.234.117
                sonar.projectKey: angular8
