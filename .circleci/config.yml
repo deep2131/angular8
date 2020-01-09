@@ -11,10 +11,10 @@ jobs:
        - run:
            name: download java 11
            command: |
-               sudo apt update
-               sudo apt install default-jre
-               sudo apt install openjdk-11-jre-headless
-               java -version
+                lsb_release -a
+               #sudo apt update
+               #sudo apt install openjdk-11-jre-headless
+               #java -version
 
            
        - run:
