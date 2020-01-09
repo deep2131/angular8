@@ -25,16 +25,8 @@ jobs:
            command: >
               wget
               https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip
-
               
-       - run:
-           name: Install Sonarqube scanner
-           command: |
-                unzip sonar-scanner-cli-3.2.0.1227-linux.zip
-                cd sonar-scanner-cli-3.2.0.1227-linux
-                cd conf
-                
-                sed -i 's/#sonar.host.url=http://localhost:9000/sonar.host.url=http://localhost:9000/g' sonar-scanner.properties
+              unzip sonar-scanner-cli-3.2.0.1227-linux.zip
                  
        - run:
            name: Run Sonarqube scanner
