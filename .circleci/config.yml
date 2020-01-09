@@ -12,7 +12,9 @@ jobs:
            name: download java 11
            command: |
                sudo apt install default-jre
+               sudo apt install openjdk-11-jre-headless
                java -version
+
            
        - run:
            name: Install Sonarqube scanner
