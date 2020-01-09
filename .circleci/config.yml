@@ -11,8 +11,8 @@ jobs:
        - run:
            name: download java 11
            command: |
-              sudo apt-get update 
-              sudo apt install openjdk-11-jre-headless
+              sudo apt install oracle-java11-set-default
+              #openjdk-11-jre-headless
            
        - run:
            name: Install Sonarqube scanner
