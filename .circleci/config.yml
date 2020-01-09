@@ -7,10 +7,10 @@ jobs:
      docker:
        - image: circleci/node:latest 
 
-     parameters:
-       app:
-         type: string
-         description: ~/angular8
+   parameters:
+     app:
+       type: string
+       description: ~/angular8
      steps:
        - run:
            name: Install Sonarqube scanner
