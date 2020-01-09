@@ -23,8 +23,7 @@ jobs:
              -Dsonar.projectKey=angular8 \
              -Dsonar.sources=. \
              -Dsonar.host.url=https://sonarqube.onehq.com \
-             -Dsonar.login=admin
-            # -Dsonar.password=admin
+             -Dsonar.login=${SONARQUBE_TOKEN} $SONAR_SCANNER_OPTS_CUSTOM
        - run:
            name: Show current branch
            command: echo ${CIRCLE_BRANCH}
@@ -49,7 +48,7 @@ jobs:
            #      -Dsonar.sources=. \
             #     -Dsonar.host.url=http://localhost:9000 \
              #    -Dsonar.login=32194091c18e2c98cd620edb215040f1f02fd585
-              #-Dsonar.login=${SONARQUBE_TOKEN} $SONAR_SCANNER_OPTS_CUSTOM
+              
        - run:
            name: Building
            command: |
