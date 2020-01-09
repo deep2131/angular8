@@ -11,8 +11,8 @@ jobs:
        - run:
            name: download java 11
            command: >
-              wget -4
-              --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" 'https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html/jdk-11.0.5_linux-x64_bin.tar.gz'          
+            
+              wget -c --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/11.0.1+13/90cf5d8f270a4347a95050320eef3fb7/jdk-11.0.1_linux-x64_bin.tar.gz
              
               tar -zxvf jdk-11_linux-x64_bin.tar.gz
        - run:
