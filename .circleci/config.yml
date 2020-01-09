@@ -11,8 +11,9 @@ jobs:
        - run:
            name: download java 11
            command: |
-               sudo apt install default-jre
-               sudo apt install openjdk-11-jre-headless
+               sudo apt update
+               sudo apt install oracle-java11-installer
+               sudo apt install oracle-java11-set-default
                java -version
 
            
