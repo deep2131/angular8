@@ -1,15 +1,11 @@
 version: 2.1
-orbs:
-  sonarqube: onehq/sonarqube@0.3.0
+#orbs:
+ # sonarqube: onehq/sonarqube@0.3.0
 jobs:
    build:
      working_directory: ~/angular8
      docker:
        - image: circleci/node:latest 
-     parameters:
-       app:
-         type: string
-         description: Github repo
 
      steps:
        - checkout
